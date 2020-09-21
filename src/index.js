@@ -343,7 +343,7 @@ class DropDownPicker extends React.Component {
         const { multiple, disabled } = this.state.props;
         const { placeholder, scrollViewProps } = this.props;
         const isPlaceholderActive = this.state.choice.label === null;
-        const label = isPlaceholderActive ? (placeholder) : this.getLabel(this.state.choice?.label, true);
+        const label = isPlaceholderActive ? (placeholder) : this.getLabel(this.state.choice?.value, true);
         const placeholderStyle = isPlaceholderActive && this.props.placeholderStyle;
         const opacity = disabled ? 0.5 : 1;
         const items = this.getItems();
@@ -448,6 +448,7 @@ class DropDownPicker extends React.Component {
                                 }]}
                                 disabled={item?.disabled || false === true}
                             >
+                                {item.icon && item.icon()}
                                 <View style={{
                                     flexDirection: this.props.itemStyle?.flexDirection ?? 'row',
                                     ...(this.props.itemStyle.hasOwnProperty('justifyContent') && {
@@ -455,7 +456,6 @@ class DropDownPicker extends React.Component {
                                     }),
                                     alignContent: 'center'
                                 }}>
-                                    {item.icon && item.icon()}
                                     <Text style={[
                                         this.props.labelStyle, 
                                             multiple ?
